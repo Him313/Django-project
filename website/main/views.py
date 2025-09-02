@@ -18,6 +18,7 @@ def home(request):
 
 
 ## Test to check if an updation has been made
+## or not
 @login_required(login_url="/login")
 def create_post(request):
     if request.method == "POST":
