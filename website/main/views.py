@@ -11,9 +11,11 @@ from .models import Post
 def home(request):
     posts = Post.objects.all()
 
-    if request.method == "DELETE":    ### this will delete the post
-        post_id = request.DELETE.get("post-id")
-        print(post_id)
+    if request.method == "POST":    ### this will delete the post
+        post_id = request.POST.get("post-id")
+        post=Post.objects.filter(id=post_id).first() ### Filter and grab the first element
+        if post and post.author == request.user:
+            post.delete()
     return render(request, 'main/home.html', {"posts": posts}) 
 
 
